@@ -2,6 +2,12 @@ name: Basic CI pipelie integeration
 
 on:
   workflow_dispatch:
+    inputs:
+      script:
+        type: string
+        description: Which TestSuite to run?
+        default: regression.xml
+
 
 
 
@@ -18,6 +24,6 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Script
-        run: mvn clean test
+        run: mvn clean test -DsuiteXmlFiles="${{inputs.script}}"
 
 
