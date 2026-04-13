@@ -8,14 +8,6 @@ on:
         description: Which TestSuite to run?
         default: regression.xml
 
-      select:
-        type: choice
-        description: Which suite you want to select and run?
-        options:
-          - smoke.xml
-          - regression.xml
-        default: regression.xml
-
 
 
 
@@ -32,6 +24,6 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Script
-        run: mvn clean test -DsuiteXmlFile=${{inputs.select}}
+        run: mvn clean test -DsuiteXmlFile=${{inputs.script}}
 
 
