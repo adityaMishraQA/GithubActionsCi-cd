@@ -1,7 +1,7 @@
 name: Basic CI pipelie integeration
 
 on:
-  push:
+  workflow_dispatch:
 
 
 
