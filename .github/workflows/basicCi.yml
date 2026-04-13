@@ -9,12 +9,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Build with Maven
-      uses: mvn clean install -DskipTests
+      - name: Build with Maven
+        uses: mvn clean install -DskipTests
 
-    - name: Run Script
-      uses: mvn clean test
+      - name: Run Script
+        uses: mvn clean test
+
+
