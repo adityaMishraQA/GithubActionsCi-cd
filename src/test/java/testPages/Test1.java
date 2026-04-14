@@ -37,6 +37,12 @@ public class Test1 extends BaseTest {
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("only smoke 2nd suite");
 
+    }@Test(groups = "feature")
+    public void test5()
+    {
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        System.out.println("Feature testing script running");
+
     }
 
 
