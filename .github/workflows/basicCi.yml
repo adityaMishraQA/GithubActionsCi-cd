@@ -12,6 +12,7 @@ on:
         description: Which TestSuite to run?
         default: regression.xml
 
+
       select:
         type: choice
         description: Which suite you want to select and run?
