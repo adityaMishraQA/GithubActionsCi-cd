@@ -1,25 +1,23 @@
 name: Basic CI pipelie integeration
 
 on:
+  schedule:
+    - cron: '30 20 * * *'
+
   pull_request:
     branches:
       - master
 
   workflow_dispatch:
     inputs:
-      script:
-        type: string
-        description: Which TestSuite to run?
-        default: regression.xml
-
-
-      select:
+      script_type:
         type: choice
-        description: Which suite you want to select and run?
+        description: Which script you want to run?
         options:
           - smoke.xml
           - regression.xml
         default: regression.xml
+
 
 
 
@@ -37,6 +35,26 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Script
-        run: mvn clean test -DsuiteXmlFile=${{inputs.select}}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+          mvn clean test -DsuiteXmlFile=featureSuite.xml
+          
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+          mvn clean test -DsuiteXmlFile=regression.xml
+          
+          else 
+          mvn clean test -DsuiteXmlFile=${{inputs.script_type}}
+          fi
+          
+          
+        
+        
+        
+        
+        
+        
+        
+
+        
 
 
