@@ -39,6 +39,7 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
           mvn clean test -DsuiteXmlFile=featureSuite.xml
           
+          
           elif [ "${{ github.event_name }}" = "schedule" ]; then
           mvn clean test -DsuiteXmlFile=regression.xml
           
