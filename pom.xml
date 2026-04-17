@@ -13,6 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile>regression.xml</suiteXmlFile>
+        <browserValue>firefox</browserValue>
 
     </properties>
     <dependencies>
@@ -34,6 +35,18 @@
             <version>6.3.4</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -51,6 +64,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.5</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <browserValue>${browserValue}</browserValue>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>target/test-classes/testSuite/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
