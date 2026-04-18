@@ -18,6 +18,15 @@ on:
           - regression.xml
         default: regression.xml
 
+      browser_type:
+        type: choice
+        description: Which browser you want to use?
+        options:
+          - chrome
+          - Firefox
+          - Edge
+        default: Firefox
+
 
 
 
@@ -37,16 +46,22 @@ jobs:
       - name: Run Script
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-          mvn clean test -DsuiteXmlFile=featureSuite.xml
+          mvn clean test -DsuiteXmlFile=featureSuite.xml 
           
           
           elif [ "${{ github.event_name }}" = "schedule" ]; then
           mvn clean test -DsuiteXmlFile=regression.xml
           
           else 
-          mvn clean test -DsuiteXmlFile=${{inputs.script_type}}
+          mvn clean test -DsuiteXmlFile=${{inputs.script_type}} -DbrowserValue=${{inputs.browser_type}}
           fi
-          
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: target/extent-testReports/extent.html
           
         
         
