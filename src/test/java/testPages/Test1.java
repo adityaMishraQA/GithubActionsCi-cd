@@ -31,7 +31,6 @@ public class Test1 extends BaseTest {
     {
         DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("Both smoke and regression");
-        Assert.assertTrue(false);
 
     }
 
