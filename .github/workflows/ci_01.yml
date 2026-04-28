@@ -1,7 +1,7 @@
 name: Too basic CI concept
 
 on:
-  push:
+  workflow_dispatch:
 
 
 
