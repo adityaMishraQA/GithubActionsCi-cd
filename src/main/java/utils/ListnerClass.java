@@ -6,46 +6,49 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.IOException;
+
 public class ListnerClass implements ITestListener {
-    private ExtentSparkReporter sparkReporter;
-    private ExtentReports reports;
-    private ExtentTest test;
+
+    private ExtentReport extentReport;
 
     @Override
     public void onStart(ITestContext context) {
-        sparkReporter=new ExtentSparkReporter("target/extent-testReports/extent.html");
-        sparkReporter.config().setDocumentTitle("Automation Report");
-        sparkReporter.config().setReportName(context.getName());
-        sparkReporter.config().setTheme(Theme.DARK);
-        reports=new ExtentReports();
-        reports.attachReporter(sparkReporter);
+        extentReport=new ExtentReport();
+        extentReport.extentReportSetup(context);
+    }
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        extentReport.extentTestCreation(result);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test=reports.createTest(result.getName());
-        test.log(Status.PASS,"Test has been Passed: "+result.getName());
+        extentReport.extentTestCasePass(result);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test=reports.createTest(result.getName());
-        test.log(Status.FAIL,"Test Failed: "+result.getName());
-        test.log(Status.FAIL,"Failed Due to: "+result.getThrowable());
+        try {
+            extentReport.extentTestCaseFail(result);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test=reports.createTest(result.getName());
-        test.log(Status.SKIP,"Test has been Skipped: "+result.getName());
+        extentReport.extentTestCaseSkipped(result);
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        reports.flush();
+        extentReport.extentReportWindUp();
     }
 }

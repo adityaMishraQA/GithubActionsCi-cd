@@ -1,6 +1,7 @@
 package baseTest;
 
 import constants.Constants;
+import driverManagment.DriverManage;
 import enums.BrowserEnum;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,9 @@ public class BaseTest {
             default -> throw new RuntimeException("Invalid BrowserName");
         };
 
+        DriverManage.setDriver(driver);
+
+
 //        if (System.getProperty(Constants.BROWSER_NAME).equalsIgnoreCase(BrowserEnum.CHROME.getBrowserName()))
 //        {
 //            driver=initializeChromeDriver();
@@ -48,7 +52,7 @@ public class BaseTest {
 //            driver=initializeEdgeDriver();
 //        }
 
-        driver.manage().window().maximize();
+        DriverManage.getDriver().manage().window().maximize();
 
     }
 
@@ -57,7 +61,7 @@ public class BaseTest {
         ChromeOptions chromeOptions=new ChromeOptions();
         chromeOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver(chromeOptions);
+        return new ChromeDriver();
     }
 
     public static WebDriver initializeFirefoxDriver()
@@ -65,7 +69,7 @@ public class BaseTest {
         FirefoxOptions firefoxOptions=new FirefoxOptions();
         firefoxOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.firefoxdriver().setup();
-        return new FirefoxDriver(firefoxOptions);
+        return new FirefoxDriver();
     }
 
     public static WebDriver initializeEdgeDriver()
@@ -73,7 +77,7 @@ public class BaseTest {
         EdgeOptions edgeOptions=new EdgeOptions();
         edgeOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.edgedriver().setup();
-        return new EdgeDriver(edgeOptions);
+        return new EdgeDriver();
     }
 
 
@@ -81,7 +85,7 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void tearDown()
     {
-        driver.quit();
+        DriverManage.getDriver().quit();
     }
 
 
