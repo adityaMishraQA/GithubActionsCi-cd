@@ -1,6 +1,9 @@
 package testPages;
 
 import baseTest.BaseTest;
+import driverManagment.DriverManage;
+import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 public class Test1 extends BaseTest {
@@ -8,7 +11,7 @@ public class Test1 extends BaseTest {
     @Test(groups = "smoke")
     public void test1()
     {
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("Only smoke suite");
 
     }
@@ -18,7 +21,7 @@ public class Test1 extends BaseTest {
     @Test(groups = "regression")
     public void test2()
     {
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("only regression suite");
 
     }
@@ -26,21 +29,23 @@ public class Test1 extends BaseTest {
     @Test(groups = {"smoke","regression"})
     public void test3()
     {
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("Both smoke and regression");
+        Assert.assertTrue(false);
 
     }
 
     @Test(groups = "smoke")
     public void test4()
     {
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("only smoke 2nd suite");
+        Assert.assertFalse(true);
 
     }@Test(groups = "feature")
     public void test5()
     {
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("Feature testing script running");
 
     }

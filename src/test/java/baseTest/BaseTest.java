@@ -1,6 +1,7 @@
 package baseTest;
 
 import constants.Constants;
+import driverManagment.DriverManage;
 import enums.BrowserEnum;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,9 @@ public class BaseTest {
             default -> throw new RuntimeException("Invalid BrowserName");
         };
 
+        DriverManage.setDriver(driver);
+
+
 //        if (System.getProperty(Constants.BROWSER_NAME).equalsIgnoreCase(BrowserEnum.CHROME.getBrowserName()))
 //        {
 //            driver=initializeChromeDriver();
@@ -48,7 +52,7 @@ public class BaseTest {
 //            driver=initializeEdgeDriver();
 //        }
 
-        driver.manage().window().maximize();
+        DriverManage.getDriver().manage().window().maximize();
 
     }
 
@@ -81,7 +85,7 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void tearDown()
     {
-        driver.quit();
+        DriverManage.getDriver().quit();
     }
 
 
