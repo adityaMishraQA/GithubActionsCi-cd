@@ -61,7 +61,7 @@ public class BaseTest {
         ChromeOptions chromeOptions=new ChromeOptions();
         chromeOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
+        return new ChromeDriver(chromeOptions);
     }
 
     public static WebDriver initializeFirefoxDriver()
@@ -69,7 +69,7 @@ public class BaseTest {
         FirefoxOptions firefoxOptions=new FirefoxOptions();
         firefoxOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.firefoxdriver().setup();
-        return new FirefoxDriver();
+        return new FirefoxDriver(firefoxOptions);
     }
 
     public static WebDriver initializeEdgeDriver()
@@ -77,7 +77,7 @@ public class BaseTest {
         EdgeOptions edgeOptions=new EdgeOptions();
         edgeOptions.addArguments(Constants.BROWSER_HEADLESS_ARG,Constants.BROWSER_DIS_GPU_ARG,Constants.BROWSER_RESOLUTION_ARG);
         WebDriverManager.edgedriver().setup();
-        return new EdgeDriver();
+        return new EdgeDriver(edgeOptions);
     }
 
 
