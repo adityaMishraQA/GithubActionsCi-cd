@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="utils.ListnerClass"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true"
+          name="Feature Test and Smoke">
+        <groups>
+            <run>
+                <include name="feature"></include>
+                <include name="smoke"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="testPages.Test1"></class>
+        </classes>
+    </test>
+</suite>
