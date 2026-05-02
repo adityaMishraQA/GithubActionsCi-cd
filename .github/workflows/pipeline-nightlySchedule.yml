@@ -1,0 +1,20 @@
+name: Nightly pipeline-schedule
+
+on:
+  schedule:
+    - cron: "30 20 * * *"
+
+
+jobs:
+  test_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code from git
+        uses: actions/checkout@v4
+
+      - name: Build with maven
+        run: mvn clean install -DskipTests
+
+      - name: Run automation script
+        run: mvn clean test -DsuiteXmlFile=regression.xml
