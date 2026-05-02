@@ -2,6 +2,12 @@ name: Too basic CI concept
 
 on:
   workflow_dispatch:
+    inputs:
+      scriptName:
+        type: string
+        description: "Which script you want to run?"
+        default: "regression.xml"
+        required: true
 
 
 
@@ -18,6 +24,6 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Script
-        run: mvn clean test
+        run: mvn clean test -DsuiteXmlFile=${{ inputs.scriptName }}
 
 
