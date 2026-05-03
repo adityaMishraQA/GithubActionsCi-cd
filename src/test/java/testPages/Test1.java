@@ -39,7 +39,6 @@ public class Test1 extends BaseTest {
     {
         DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("only smoke 2nd suite");
-        Assert.assertFalse(true);
 
     }@Test(groups = "feature")
     public void test5()
@@ -47,6 +46,12 @@ public class Test1 extends BaseTest {
         DriverManage.getDriver().get("https://rahulshettyacademy.com/AutomationPractice/");
         System.out.println("Feature testing script running");
 
+    }
+
+    @Test(groups = "feature")
+    public void test6()
+    {
+        System.out.println("This feature  last");
     }
 
 
